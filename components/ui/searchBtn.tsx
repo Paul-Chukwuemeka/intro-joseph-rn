@@ -1,9 +1,15 @@
 import { Svg, Path, Circle } from "react-native-svg";
-import React from "react";
+import React, { useContext } from "react";
 import { Pressable } from "react-native";
 import { BlurView } from "expo-blur";
+import { AppContext } from "@/context/appContext";
 
 const SearchBtn = () => {
+  const { setIsSearch ,theme} = useContext(AppContext)!;
+  function handleClick() {
+    setIsSearch(true);
+  }
+
   return (
     <Pressable
       style={{
@@ -12,6 +18,7 @@ const SearchBtn = () => {
         borderRadius: 20,
         overflow: "hidden",
       }}
+      onPress={handleClick}
     >
       <BlurView
         intensity={0}
@@ -24,11 +31,11 @@ const SearchBtn = () => {
         }}
       >
         <Svg
-          width="30"
-          height="30"
+          width="25"
+          height="25"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="currentColor"
+          stroke={theme.primaryText}
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"

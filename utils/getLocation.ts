@@ -8,7 +8,16 @@ const getLocation = async () => {
     return;
   }
 
-  let location = await expoLocation.getCurrentPositionAsync({});
+  const provider = await expoLocation.getProviderStatusAsync();
+
+  if (!provider.locationServicesEnabled) {
+    console.log("location services disabled");
+    return null;
+  }
+ 
+  let location = await expoLocation.getCurrentPositionAsync({
+    accuracy: expoLocation.Accuracy.High, 
+  });
 
   return { lat: location.coords.latitude, long: location.coords.longitude };
 };

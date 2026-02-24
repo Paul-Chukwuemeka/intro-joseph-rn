@@ -1,23 +1,24 @@
 import SearchBtn from "@/components/ui/searchBtn";
-import { View, Text } from "react-native";
-import React, { useEffect, useState } from "react";
 import { style } from "@/constants/stylesheet";
-import getWeather from "@/utils/getWeather";
+import { AppContext } from "@/context/appContext";
+import React, { useContext } from "react";
+import { View, Text } from "react-native";
+import { getDate } from "@/utils/getDate";
 
 const Header = () => {
-  const [location, setLocation] = useState("");
+  const { theme, data } = useContext(AppContext)!;
+  const date = getDate();
 
-  useEffect(() => {
-    async function load() {
-      const data = await getWeather();
-      setLocation(data.location.name)
-    }
-    load();
-  }, []);
+ 
   return (
     <View style={style.top}>
-      <Text style={style.location}>{location}</Text>
-      <SearchBtn />
+      <View style={style.topbar}>
+        <Text style={[style.location, { color: theme.primaryText }]}>
+          {data?.location.name}
+        </Text>
+        <SearchBtn />
+      </View>
+      <Text style={[style.date, { color: theme.primaryText,backgroundColor:theme.card }]}>{date}</Text>
     </View>
   );
 };

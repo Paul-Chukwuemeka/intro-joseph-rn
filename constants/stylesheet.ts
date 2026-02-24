@@ -10,8 +10,6 @@ import {
   colors,
 } from "@/constants/constants";
 
-
-
 export const style = StyleSheet.create({
   container: {
     flex: 1,
@@ -31,13 +29,18 @@ export const style = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     width: "100%",
+    flexDirection: "column",
+    height: 100,
+    gap: 10,
+  },
+  topbar: {
+    display: "flex",
     flexDirection: "row",
+    alignItems: "center",
   },
   date: {
     width: "auto",
     alignSelf: "center",
-    color: colors.Clear,
-    backgroundColor: "black",
     paddingHorizontal: spacing.lg,
     paddingVertical: spacing.sm,
     borderRadius: radius.pill,
@@ -47,7 +50,7 @@ export const style = StyleSheet.create({
   weather: {
     textAlign: "center",
     alignSelf: "center",
-    marginTop: spacing.lg,
+    marginTop: 0,
     fontSize: typography.h2,
     fontFamily: fontWeights.SemiBold,
   },
@@ -60,9 +63,7 @@ export const style = StyleSheet.create({
   stats: {
     borderRadius: radius.md,
     width: "100%",
-    borderWidth: 2,
     height: 200,
-    backgroundColor: "black",
     marginTop: spacing.xxl,
     display: "flex",
     flexDirection: "row",
@@ -74,12 +75,10 @@ export const style = StyleSheet.create({
     fontSize: 60,
   },
   statValue: {
-    color: colors.Clear,
     fontSize: typography.h2,
-    fontFamily: fontWeights.Medium,
+    fontFamily: fontWeights.SemiBold,
   },
   statProp: {
-    color: colors.Clear,
     fontSize: typography.body,
   },
   statBox: {
@@ -89,14 +88,14 @@ export const style = StyleSheet.create({
   forecasts: {
     flexDirection: "row",
     gap: 20,
-    height: 100,
+    height: 110,
   },
   forecast: {
-    borderWidth: 1,
     flex: 1,
     alignItems: "center",
     padding: spacing.md,
     borderRadius: radius.sm,
+    justifyContent: "space-between",
     gap: 2,
   },
   location: {
@@ -107,4 +106,57 @@ export const style = StyleSheet.create({
     fontFamily: fontWeights.ExtraBold,
     letterSpacing: letterSpacings.h1,
   },
+  searchField: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    zIndex: 100,
+    paddingVertical: 100,
+    paddingHorizontal: 20,
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    gap: 10,
+  },
+  input: {
+    width: "100%",
+    maxWidth: 500,
+    backgroundColor: "white",
+    paddingHorizontal: 15,
+    height: 50,
+    zIndex: 100,
+    position: "relative",
+    borderRadius: radius.sm,
+    fontFamily: fontWeights.SemiBold,
+    fontSize: typography.body,
+  },
+  inputBlur: {
+    width: 10000,
+    position: "absolute",
+    flex: 1,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    zIndex: 10,
+  },
+  city: {
+    padding: 10,
+    paddingVertical: 15,
+    borderRadius: radius.xs,
+    backgroundColor: "white",
+  },
+  cities: {
+    width: "100%",
+    maxWidth: 500,
+    display: "flex",
+    gap: 5,
+    zIndex: 100,
+  },
+  image:{
+    width:40,
+    height:40,
+  }
 });

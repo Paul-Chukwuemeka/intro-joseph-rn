@@ -35,7 +35,7 @@ const useLoadFonts = () => {
     if (fontError) {
       console.error("Font loading failed:", fontError);
     }
-  }, [fontError]);
+  }, [fontError]); 
 
   return { fontsLoaded, fontError };
 };
