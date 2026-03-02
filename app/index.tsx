@@ -18,6 +18,7 @@ import SearchField from "@/components/searchField";
 import Stats from "@/components/stats";
 import { AppContext } from "@/context/appContext";
 import { StatusBar } from "expo-status-bar";
+import Counter from "@/components/TempCount";
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
@@ -33,6 +34,8 @@ const Home = () => {
   if (!fontsLoaded && !fontError && !data) {
     return null;
   }
+
+  console.log(theme)
   return (
     <SafeAreaProvider>
       <StatusBar style={"light"} />
@@ -47,16 +50,12 @@ const Home = () => {
             contentContainerStyle={style.scrollContent}
           >
             <Header />
-            <View style={{ marginTop: spacing.md }}>
+            {/* <View style={{ marginTop: spacing.md }}>
               <Text style={[style.weather, { color: theme.secondaryText }]}>
                 {data.current.condition.text}
               </Text>
             </View>
-            <View style={{ marginTop: spacing.xxl }}>
-              <Text style={[style.temp, { color: theme.primaryText }]}>
-                {Math.round(data.current.temp_c)}°
-              </Text>
-            </View>
+              <Counter target={Math.round(data.current.temp_c)} />
             <View
               style={{
                 marginTop: spacing.section,
@@ -112,7 +111,7 @@ const Home = () => {
                   return <ForecastCard key={i} d={d} />;
                 })}
               </View>
-            </View>
+            </View> */}
           </ScrollView>
         )}
       </SafeAreaView>

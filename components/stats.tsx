@@ -28,7 +28,7 @@ const Stats = () => {
         <Text style={[style.statValue, { color: theme.primaryText }]}>
           {data && data.current.vis_km}km
         </Text>
-        <Text style={[style.statProp, { color: theme.secondaryText }]}>Wind</Text>
+        <Text style={[style.statProp, { color: theme.secondaryText }]}>Visibility</Text>
       </View>
     </View>
   );

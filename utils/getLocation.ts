@@ -18,8 +18,7 @@ const getLocation = async () => {
   let location = await expoLocation.getCurrentPositionAsync({
     accuracy: expoLocation.Accuracy.High, 
   });
-
-  return { lat: location.coords.latitude, long: location.coords.longitude };
+  return { latitude: location.coords.latitude, longitude: location.coords.longitude };
 };
 
 export { getLocation };

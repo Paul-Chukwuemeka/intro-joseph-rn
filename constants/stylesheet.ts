@@ -6,8 +6,6 @@ import {
   lineHeight,
   fontWeights,
   letterSpacings,
-  dummyForecast,
-  colors,
 } from "@/constants/constants";
 
 export const style = StyleSheet.create({
@@ -31,12 +29,14 @@ export const style = StyleSheet.create({
     width: "100%",
     flexDirection: "column",
     height: 100,
-    gap: 10,
+    gap:0,
   },
   topbar: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    justifyContent:"space-between",
+    width:"100%"
   },
   date: {
     width: "auto",
@@ -46,6 +46,7 @@ export const style = StyleSheet.create({
     borderRadius: radius.pill,
     fontSize: typography.body,
     fontFamily: fontWeights.Medium,
+    letterSpacing: letterSpacings.tiny
   },
   weather: {
     textAlign: "center",

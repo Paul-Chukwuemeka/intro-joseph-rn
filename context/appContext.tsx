@@ -1,7 +1,8 @@
 import { useState, createContext, ReactNode, useEffect } from "react";
-import { WeatherResponse } from "@/types";
+import { OpenMeteoWeatherResponse,WeatherCategory } from "@/types";
 import { colors } from "@/constants/constants";
 import getForecast from "@/utils/getForeCast";
+import { currentLocation } from "@/utils/currentlocation";
 
 export type themeType = {
   background: string;
@@ -17,8 +18,10 @@ type City = {
 };
 
 type appContextType = {
-  data: WeatherResponse | null;
-  setData: React.Dispatch<React.SetStateAction<WeatherResponse | null>>;
+  data: OpenMeteoWeatherResponse | null;
+  setData: React.Dispatch<
+    React.SetStateAction<OpenMeteoWeatherResponse | null>
+  >;
   setForecast: React.Dispatch<React.SetStateAction<any | null>>;
   forecast: any | null;
   theme: themeType;
@@ -35,7 +38,7 @@ type appContextType = {
 export const AppContext = createContext<appContextType | null>(null);
 
 export function AppContextProvider({ children }: { children: ReactNode }) {
-  const [data, setData] = useState<WeatherResponse | null>(null);
+  const [data, setData] = useState<OpenMeteoWeatherResponse | null>(null);
   const [query, setQuery] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isSearch, setIsSearch] = useState<boolean>(false);
@@ -45,8 +48,7 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     async function load() {
-      const f = await getForecast(query ?? undefined);
-      setForecast(f.forecast.forecastday);
+      const f = await getForecast();
       setData(f);
     }
     load();
@@ -54,37 +56,34 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!data) return;
-    const condition = data.current.condition.text.toLowerCase();
+    const weatherCode = data.current.weather_code;
     const isDay = data.current.is_day;
-    function getTheme() {
-      if (condition.includes("thunder")) {
-        return isDay ? colors.Thunderstorm : colors.ThunderstormNight;
-      }
-      if (condition.includes("rain")) {
-        return isDay ? colors.Rain : colors.RainNight;
-      }
-      if (condition.includes("snow")) {
-        return isDay ? colors.Snow : colors.SnowNight;
-      }
-      if (condition.includes("cloud") || condition.includes("overcast")) {
-        return isDay ? colors.Clouds : colors.CloudsNight;
-      }
-      if (
-        condition.includes("mist") ||
-        condition.includes("fog") ||
-        condition.includes("haze")
-      ) {
-        return isDay ? colors.Mist : colors.MistNight;
-      }
-      if (condition.includes("clear") || condition.includes("sunny")) {
-        return isDay ? colors.Clear : colors.ClearNight;
-      }
 
-      return colors.Neutral;
+    function getTheme(weatherCode: number, isDay: number) {
+      const category = WeatherCategory[weatherCode] ?? "Neutral";
+
+      switch (category) {
+        case "Thunderstorm":
+          return isDay ? colors.Thunderstorm : colors.ThunderstormNight;
+        case "Rain":
+          return isDay ? colors.Rain : colors.RainNight;
+        case "Snow":
+          return isDay ? colors.Snow : colors.SnowNight;
+        case "Clouds":
+          return isDay ? colors.Clouds : colors.CloudsNight;
+        case "Mist":
+          return isDay ? colors.Mist : colors.MistNight;
+        case "Clear":
+          return isDay ? colors.Clear : colors.ClearNight;
+        default:
+          return colors.Neutral;
+      }
     }
-    const themeResult = getTheme();
+    const themeResult = getTheme(weatherCode, isDay);
     setTheme(themeResult);
   }, [data]);
+
+  currentLocation()
 
   return (
     <AppContext.Provider

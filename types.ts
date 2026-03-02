@@ -1,142 +1,94 @@
-export type WeatherResponse = {
-  location: Location;
+export type OpenMeteoWeatherResponse = {
+  latitude: number;
+  longitude: number;
+  generationtime_ms: number;
+  utc_offset_seconds: number;
+  timezone: string;
+  timezone_abbreviation: string;
+  elevation: number;
+
+  current_units: WeatherUnits;
   current: CurrentWeather;
-  forecast: forecastType;
+
+  hourly_units: WeatherUnits;
+  hourly: HourlyWeather;
 };
 
-export type Location = {
-  name: string;
-};
-
-export type forecastType = {
-  forecastDay: ForecastDay;
-};
-
-export interface ForecastDay {
-  date: string;
-  date_epoch: number;
-
-  day: DaySummary;
-  astro: Astro;
-  hour: Hour[];
-}
-
-export interface DaySummary {
-  avghumidity: number;
-  avgtemp_c: number;
-  avgtemp_f: number;
-  avgvis_km: number;
-  avgvis_miles: number;
-
-  condition: Condition;
-
-  daily_chance_of_rain: number;
-  daily_chance_of_snow: number;
-  daily_will_it_rain: 0 | 1;
-  daily_will_it_snow: 0 | 1;
-
-  maxtemp_c: number;
-  maxtemp_f: number;
-  mintemp_c: number;
-  mintemp_f: number;
-
-  maxwind_kph: number;
-  maxwind_mph: number;
-
-  totalprecip_in: number;
-  totalprecip_mm: number;
-  totalsnow_cm: number;
-
-  uv: number;
-}
-
-export interface Astro {
-  is_moon_up: 0 | 1;
-  is_sun_up: 0 | 1;
-  moon_illumination: number;
-  moon_phase: string;
-  moonrise: string;
-  moonset: string;
-  sunrise: string;
-  sunset: string;
-}
-
-export interface Hour {
+export interface WeatherUnits {
   time: string;
-  time_epoch: number;
-
-  temp_c: number;
-  temp_f: number;
-
-  is_day: 0 | 1;
-
-  condition: Condition;
-
-  wind_mph: number;
-  wind_kph: number;
-  wind_degree: number;
-  wind_dir: string;
-
-  pressure_mb: number;
-  pressure_in: number;
-
-  precip_mm: number;
-  precip_in: number;
-
-  humidity: number;
-  cloud: number;
-
-  feelslike_c: number;
-  feelslike_f: number;
-
-  windchill_c: number;
-  windchill_f: number;
-
-  heatindex_c: number;
-  heatindex_f: number;
-
-  dewpoint_c: number;
-  dewpoint_f: number;
-
-  vis_km: number;
-  vis_miles: number;
-
-  uv: number;
-
-  gust_mph: number;
-  gust_kph: number;
-
-  will_it_rain: 0 | 1;
-  chance_of_rain: number;
-
-  will_it_snow: 0 | 1;
-  chance_of_snow: number;
-
-  snow_cm: number;
+  temperature_2m: string;
+  relative_humidity_2m: string;
+  apparent_temperature: string;
+  is_day: string;
+  precipitation: string;
+  rain: string;
+  weather_code: string;
+  cloud_cover: string;
+  pressure_msl: string;
+  visibility: string;
+  wind_speed_10m: string;
+  wind_direction_10m: string;
 }
 
-export type CurrentWeather = {
-  cloud: number;
-  condition: Condition;
-  feelslike_c: number;
-  feelslike_f: number;
-  humidity: number;
+export interface CurrentWeather {
+  time: string;
+  temperature_2m: number;
+  relative_humidity_2m: number;
+  apparent_temperature: number;
   is_day: number;
-  pressure_in: number;
-  pressure_mb: number;
-  temp_c: number;
-  temp_f: number;
-  uv: number;
-  vis_km: number;
-  vis_miles: number;
-  wind_degree: number;
-  wind_dir: string;
-  wind_kph: number;
-  wind_mph: number;
-};
+  precipitation: number;
+  rain: number;
+  weather_code: number;
+  cloud_cover: number;
+  pressure_msl: number;
+  visibility: number;
+  wind_speed_10m: number;
+  wind_direction_10m: number;
+}
 
-export type Condition = {
-  text: string;
-  icon: string;
-  code: number;
+export interface HourlyWeather {
+  time: string[];
+
+  temperature_2m: number[];
+  relative_humidity_2m: number[];
+  apparent_temperature: number[];
+  precipitation: number[];
+  rain: number[];
+  weather_code: number[];
+  cloud_cover: number[];
+  pressure_msl: number[];
+  visibility: number[];
+  wind_speed_10m: number[];
+  wind_direction_10m: number[];
+}
+
+export const WeatherCategory: Record<number, "Clear" | "Clouds" | "Rain" | "Thunderstorm" | "Snow" | "Mist" | "Neutral"> = {
+  0: "Clear",
+  1: "Clear",
+  2: "Clouds",
+  3: "Clouds",
+  45: "Mist",
+  48: "Mist",
+  51: "Rain",
+  53: "Rain",
+  55: "Rain",
+  56: "Rain",
+  57: "Rain",
+  61: "Rain",
+  63: "Rain",
+  65: "Rain",
+  66: "Rain",
+  67: "Rain",
+  71: "Snow",
+  73: "Snow",
+  75: "Snow",
+  77: "Snow",
+  80: "Rain",
+  81: "Rain",
+  82: "Rain",
+  85: "Snow",
+  86: "Snow",
+  95: "Thunderstorm",
+  96: "Thunderstorm",
+  99: "Thunderstorm",
 };

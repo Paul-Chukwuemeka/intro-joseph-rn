@@ -10,10 +10,10 @@ export const spacing = {
 };
 
 export const typography = {
-  display: 180, // Scaled slightly down from 204 for better device fit
-  h1: 36, // "Paris" (Needs to be larger/bolder than 28)
+  display: 180, 
+  h1: 36, 
   h2: 18, // "Daily Summary", "Weekly forecast"
-  body: 15, // Summary text
+  body: 14, // Summary text
   cardTemp: 16, // Temperatures inside the small forecast cards
   caption: 12, // "Wind", "Humidity", "21 Jan"
   tiny: 10,
@@ -61,43 +61,8 @@ export const letterSpacings = {
   // The small dates (21 Jan): Extra breathing room for legibility
   tiny: 0.8,
 };
-export const dummyForecast = [
-  {
-    temp: 26,
-    condition: "sunny",
-    date: "21 Jan",
-  },
-  {
-    temp: 25,
-    condition: "sunny",
-    date: "21 Jan",
-  },
-  {
-    temp: 27,
-    condition: "sunny",
-    date: "21 Jan",
-  },
-  {
-    temp: 26,
-    condition: "sunny",
-    date: "21 Jan",
-  },
-];
 
 export const colors = {
-  // Clear: "#FFD524",
-  // ClearNight: "#FFA500", // darker gold for night
-  // Clouds: "#B0C4DE",
-  // CloudsNight: "#708090", // slate gray for night
-  // Rain: "#1E90FF",
-  // RainNight: "#104E8B", // darker blue
-  // Thunderstorm: "#4B0082",
-  // ThunderstormNight: "#2E0854",
-  // Snow: "#ADD8E6",
-  // SnowNight: "#87CEFA",
-  // Mist: "#708090",
-  // MistNight: "#2F4F4F",
-  // black: "#000000",
   Neutral: {
     background: "#FAFAFA",
     card: "#FFFFFF",

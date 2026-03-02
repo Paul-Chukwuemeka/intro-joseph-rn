@@ -1,20 +1,25 @@
-import { api } from "@/api";
+import { forecastApi } from "@/apis/forecast";
 import { getLocation } from "./getLocation";
+import { OpenMeteoWeatherResponse } from "@/types";
 
-async function getForecast(query?: string | null): Promise<any> {
-  let q: string;
+async function getForecast(query?: {
+  longitude: number;
+  latitude: number;
+}): Promise<OpenMeteoWeatherResponse> {
+  let q: { longitude: number; latitude: number };
+  const location = await getLocation();
 
   if (query) {
     q = query;
   } else {
-    const location = await getLocation();
-    if (!location) {
-      throw new Error("Unable to get location");
-    }
-    q = `${location?.lat},${location?.long}`;
+    q = location!;
   }
-  const res = await api.get(`/forecast.json?q=${q}&days=3`);
-
+  const res = await forecastApi.get(`/forecast`, {
+    params: {
+      latitude: q.longitude,
+      longitude: q.latitude,
+    },
+  });
   return res.data;
 }
 
