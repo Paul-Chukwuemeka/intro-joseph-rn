@@ -7,13 +7,16 @@ import { getDate } from "@/utils/getDate";
 import { Menubtn } from "./ui/menuBtn";
 
 const Header = () => {
-  const { theme, data } = useContext(AppContext)!;
+  const { theme, data, currentLocation } = useContext(AppContext)!;
   const date = getDate();
 
   return (
     <View style={style.top}>
       <View style={style.topbar}>
         <Menubtn />
+        <Text style={[style.location, { color: theme.primaryText }]}>
+          {currentLocation && currentLocation[0]}
+        </Text>
         <SearchBtn />
       </View>
       <Text

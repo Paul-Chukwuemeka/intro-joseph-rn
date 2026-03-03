@@ -7,7 +7,6 @@ import { ForecastDay } from "@/types";
 
 const ForecastCard = ({ d }: { d: ForecastDay }) => {
   const { theme } = useContext(AppContext)!;
-  console.log(d.day.condition.icon);
   return (
     <View style={[style.forecast, { backgroundColor: theme.card }]}>
       <Text

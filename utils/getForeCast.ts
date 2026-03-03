@@ -5,7 +5,7 @@ import { OpenMeteoWeatherResponse } from "@/types";
 async function getForecast(query?: {
   longitude: number;
   latitude: number;
-}): Promise<OpenMeteoWeatherResponse> {
+}): Promise<OpenMeteoWeatherResponse | any> {
   let q: { longitude: number; latitude: number };
   const location = await getLocation();
 
@@ -14,13 +14,18 @@ async function getForecast(query?: {
   } else {
     q = location!;
   }
-  const res = await forecastApi.get(`/forecast`, {
-    params: {
-      latitude: q.longitude,
-      longitude: q.latitude,
-    },
-  });
-  return res.data;
+  try {
+    const res = await forecastApi.get(`/forecast`, {
+      params: {
+        latitude: q.latitude,
+        longitude: q.longitude,
+      },
+    });
+    return res.data;
+  } catch (error) {
+    console.log(error)
+    return null
+  }
 }
 
 export default getForecast;

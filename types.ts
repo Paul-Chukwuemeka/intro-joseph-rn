@@ -92,3 +92,36 @@ export const WeatherCategory: Record<number, "Clear" | "Clouds" | "Rain" | "Thun
   96: "Thunderstorm",
   99: "Thunderstorm",
 };
+
+export type themeType = {
+  background: string;
+  card: string;
+  primaryText: string;
+  secondaryText: string;
+  accent: string;
+};
+export type City = {
+  name: string;
+  country: string;
+  region: string;
+};
+
+export type appContextType = {
+  data: OpenMeteoWeatherResponse | null;
+  setData: React.Dispatch<
+    React.SetStateAction<OpenMeteoWeatherResponse | null>
+  >;
+  setForecast: React.Dispatch<React.SetStateAction<any | null>>;
+  forecast: any | null;
+  theme: themeType;
+  setTheme: React.Dispatch<React.SetStateAction<themeType>>;
+  setIsSearch: React.Dispatch<React.SetStateAction<boolean>>;
+  isSearch: boolean;
+  setQuery: React.Dispatch<React.SetStateAction<string>>;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+  setCities: React.Dispatch<React.SetStateAction<City[] | null>>;
+  cities: City[] | null;
+  searchQuery: string;
+  currentLocation: string[] | null;
+  currentWeather: CurrentWeather | null
+};

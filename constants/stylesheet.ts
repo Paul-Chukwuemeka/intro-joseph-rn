@@ -100,12 +100,10 @@ export const style = StyleSheet.create({
     gap: 2,
   },
   location: {
-    flex: 1,
-    transform: [{ translateX: 25 }],
     textAlign: "center",
-    fontSize: typography.h1,
+    fontSize: typography.h2,
     fontFamily: fontWeights.ExtraBold,
-    letterSpacing: letterSpacings.h1,
+    letterSpacing: letterSpacings.h1,  
   },
   searchField: {
     position: "absolute",

@@ -24,7 +24,7 @@ SplashScreen.preventAutoHideAsync().catch(() => {});
 
 const Home = () => {
   const { fontsLoaded, fontError } = useLoadFonts();
-  const { data, theme, isSearch, forecast } = useContext(AppContext)!;
+  const { data, theme, isSearch, forecast,currentWeather } = useContext(AppContext)!;
   useEffect(() => {
     if ((fontsLoaded && data) || (fontError && data)) {
       SplashScreen.hideAsync().catch(() => {});
@@ -35,7 +35,8 @@ const Home = () => {
     return null;
   }
 
-  console.log(theme)
+  
+
   return (
     <SafeAreaProvider>
       <StatusBar style={"light"} />
@@ -50,12 +51,12 @@ const Home = () => {
             contentContainerStyle={style.scrollContent}
           >
             <Header />
-            {/* <View style={{ marginTop: spacing.md }}>
+            <View style={{ marginTop: spacing.md }}>
               <Text style={[style.weather, { color: theme.secondaryText }]}>
-                {data.current.condition.text}
+                {/* {data.current.condition.text} */}
               </Text>
             </View>
-              <Counter target={Math.round(data.current.temp_c)} />
+              {/* <Counter target={Math.round(data.current.temp_c)} />
             <View
               style={{
                 marginTop: spacing.section,
