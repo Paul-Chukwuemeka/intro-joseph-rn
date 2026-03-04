@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View,Text } from "react-native";
 import Animated, {
   useAnimatedReaction,
   useSharedValue,
@@ -16,7 +16,7 @@ export default function Counter({
   target: number;
   duration?: number;
 }) {
-  const progress = useSharedValue(target - 20);
+  const progress = useSharedValue(target >= 20 ? target - 20: 0);
   const [displayValue, setDisplayValue] = useState(0);
 
   useAnimatedReaction(

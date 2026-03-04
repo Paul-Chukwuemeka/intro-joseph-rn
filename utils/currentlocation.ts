@@ -6,5 +6,5 @@ export async function getCurrentLocation() {
   const url = `https://api.geoapify.com/v1/geocode/reverse?lat=${location?.latitude}&lon=${location?.longitude}&apiKey=e2a5b86a7c60481f96ac78d707f449c9`;
   const res = await axios.get(url);
   const f = res.data.features[0].properties;
-  return [f.street, f.city];
+  return [f.street ?? f.suburb ?? f.county, f.city];
 }

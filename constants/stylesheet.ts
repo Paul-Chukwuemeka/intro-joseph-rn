@@ -28,15 +28,22 @@ export const style = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     flexDirection: "column",
-    height: 100,
-    gap:0,
+    height: "auto",
+    gap: 5,
   },
   topbar: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent:"space-between",
-    width:"100%"
+    justifyContent: "space-between",
+    width: "100%",
+  },
+    location: {
+    textAlign: "center",
+    fontSize: typography.h2,
+    fontFamily: fontWeights.ExtraBold,
+    letterSpacing: letterSpacings.h1,
+    flex:1,
   },
   date: {
     width: "auto",
@@ -46,7 +53,8 @@ export const style = StyleSheet.create({
     borderRadius: radius.pill,
     fontSize: typography.body,
     fontFamily: fontWeights.Medium,
-    letterSpacing: letterSpacings.tiny
+    letterSpacing: letterSpacings.tiny,
+    margin:"auto"
   },
   weather: {
     textAlign: "center",
@@ -99,12 +107,6 @@ export const style = StyleSheet.create({
     justifyContent: "space-between",
     gap: 2,
   },
-  location: {
-    textAlign: "center",
-    fontSize: typography.h2,
-    fontFamily: fontWeights.ExtraBold,
-    letterSpacing: letterSpacings.h1,  
-  },
   searchField: {
     position: "absolute",
     top: 0,
@@ -154,8 +156,8 @@ export const style = StyleSheet.create({
     gap: 5,
     zIndex: 100,
   },
-  image:{
-    width:40,
-    height:40,
-  }
+  image: {
+    width: 40,
+    height: 40,
+  },
 });

@@ -19,12 +19,15 @@ import Stats from "@/components/stats";
 import { AppContext } from "@/context/appContext";
 import { StatusBar } from "expo-status-bar";
 import Counter from "@/components/TempCount";
+import { WeatherCategory } from "@/types";
+import Summary from "@/components/summary";
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
 const Home = () => {
   const { fontsLoaded, fontError } = useLoadFonts();
-  const { data, theme, isSearch, forecast,currentWeather } = useContext(AppContext)!;
+  const { data, theme, isSearch, forecast, currentWeather } =
+    useContext(AppContext)!;
   useEffect(() => {
     if ((fontsLoaded && data) || (fontError && data)) {
       SplashScreen.hideAsync().catch(() => {});
@@ -34,8 +37,6 @@ const Home = () => {
   if (!fontsLoaded && !fontError && !data) {
     return null;
   }
-
-  
 
   return (
     <SafeAreaProvider>
@@ -51,68 +52,46 @@ const Home = () => {
             contentContainerStyle={style.scrollContent}
           >
             <Header />
-            <View style={{ marginTop: spacing.md }}>
-              <Text style={[style.weather, { color: theme.secondaryText }]}>
-                {/* {data.current.condition.text} */}
-              </Text>
-            </View>
-              {/* <Counter target={Math.round(data.current.temp_c)} />
-            <View
-              style={{
-                marginTop: spacing.section,
-              }}
-            >
-              <Text
-                style={{
-                  fontFamily: fontWeights.ExtraBold,
-                  fontSize: typography.h2,
-                  letterSpacing: letterSpacings.h2,
-                  color: theme.secondaryText,
-                  lineHeight: lineHeight.body,
-                }}
-              >
-                Daily Summary
-              </Text>
-              <Text
-                style={{
-                  fontSize: typography.body,
-                  fontFamily: fontWeights.Medium,
-                  color: theme.secondaryText,
-                }}
-              >
-                It feels like
-                <Text> {Math.round(data.current.feelslike_c)}</Text>°.
-              </Text>
-            </View>
-            <Stats />
-            <View style={{ marginTop: spacing.section }}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: typography.h2,
-                    fontFamily: fontWeights.ExtraBold,
-                    color: theme.secondaryText,
-                  }}
-                >
-                  Weekly forecast
-                </Text>
-                <Lucide
-                  name="move-right"
-                  style={[style.icon, { color: theme.secondaryText }]}
-                />
+            {currentWeather && (
+              <View>
+                <View style={{ marginTop: spacing.md }}>
+                  <Text style={[style.weather, { color: theme.secondaryText }]}>
+                    {WeatherCategory[currentWeather.weather_code]}
+                  </Text>
+                </View>
+                <Counter target={Math.round(currentWeather.temperature_2m)} />
+                <Summary />
+                <Stats />
+                {/* <View style={{ marginTop: spacing.section }}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontSize: typography.h2,
+                        fontFamily: fontWeights.ExtraBold,
+                        color: theme.secondaryText,
+                      }}
+                    >
+                      Weekly forecast
+                    </Text>
+                    <Lucide
+                      name="move-right"
+                      style={[style.icon, { color: theme.secondaryText }]}
+                    />
+                  </View>
+                  <View style={style.forecasts}>
+                    {forecast.map((d: any, i: number) => {
+                      return <ForecastCard key={i} d={d} />;
+                    })}
+                  </View>
+                </View> */}
               </View>
-              <View style={style.forecasts}>
-                {forecast.map((d: any, i: number) => {
-                  return <ForecastCard key={i} d={d} />;
-                })}
-              </View>
-            </View> */}
+            )}
           </ScrollView>
         )}
       </SafeAreaView>

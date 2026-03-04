@@ -7,27 +7,56 @@ export type OpenMeteoWeatherResponse = {
   timezone_abbreviation: string;
   elevation: number;
 
-  current_units: WeatherUnits;
   current: CurrentWeather;
+  daily: DailyWeather;
 
-  hourly_units: WeatherUnits;
   hourly: HourlyWeather;
 };
 
-export interface WeatherUnits {
-  time: string;
-  temperature_2m: string;
-  relative_humidity_2m: string;
-  apparent_temperature: string;
-  is_day: string;
-  precipitation: string;
-  rain: string;
-  weather_code: string;
-  cloud_cover: string;
-  pressure_msl: string;
-  visibility: string;
-  wind_speed_10m: string;
-  wind_direction_10m: string;
+export interface DailyWeather {
+  time: string[];
+  apparent_temperature_max: number[];
+  apparent_temperature_mean: number[];
+  apparent_temperature_min: number[];
+  daylight_duration: number[];
+  precipitation_hours: number[];
+  precipitation_sum: number[];
+  rain_sum: number[];
+  showers_sum: number[];
+  sunrise: string[];
+  sunset: string[];
+  sunshine_duration: number[];
+  temperature_2m_max: number[];
+  temperature_2m_mean: number[];
+  temperature_2m_min: number[];
+  uv_index_clear_sky_max: number[];
+  uv_index_max: number[];
+  weather_code: number[];
+  wind_direction_10m_dominant: number[];
+  wind_gusts_10m_max: number[];
+  wind_speed_10m_max: number[];
+}
+
+export interface day {
+  apparent_temperature_mean: number;
+  apparent_temperature_min: number;
+  daylight_duration: number;
+  precipitation_hours: number;
+  precipitation_sum: number;
+  rain_sum: number;
+  showers_sum: number;
+  sunrise: string;
+  sunset: string;
+  sunshine_duration: number;
+  temperature_2m_max: number;
+  temperature_2m_mean: number;
+  temperature_2m_min: number;
+  uv_index_clear_sky_max: number;
+  uv_index_max: number;
+  weather_code: number;
+  wind_direction_10m_dominant: number;
+  wind_gusts_10m_max: number;
+  wind_speed_10m_max: number;
 }
 
 export interface CurrentWeather {
@@ -62,7 +91,10 @@ export interface HourlyWeather {
   wind_direction_10m: number[];
 }
 
-export const WeatherCategory: Record<number, "Clear" | "Clouds" | "Rain" | "Thunderstorm" | "Snow" | "Mist" | "Neutral"> = {
+export const WeatherCategory: Record<
+  number,
+  "Clear" | "Clouds" | "Rain" | "Thunderstorm" | "Snow" | "Mist" | "Neutral"
+> = {
   0: "Clear",
   1: "Clear",
   2: "Clouds",
@@ -123,5 +155,5 @@ export type appContextType = {
   cities: City[] | null;
   searchQuery: string;
   currentLocation: string[] | null;
-  currentWeather: CurrentWeather | null
+  currentWeather: CurrentWeather | null;
 };

@@ -1,15 +1,9 @@
 import { useState, createContext, ReactNode, useEffect } from "react";
-import { OpenMeteoWeatherResponse, WeatherCategory } from "@/types";
+import { day, OpenMeteoWeatherResponse, WeatherCategory } from "@/types";
 import { colors } from "@/constants/constants";
 import getForecast from "@/utils/getForeCast";
 import { getCurrentLocation } from "@/utils/currentlocation";
-import {
-  WeatherUnits,
-  CurrentWeather,
-  appContextType,
-  themeType,
-  City,
-} from "@/types";
+import { CurrentWeather, appContextType, themeType, City } from "@/types";
 
 class WeatherItem {
   [key: string]: string;
@@ -33,6 +27,8 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
   const [currentWeather, setCurrentWeather] = useState<CurrentWeather | null>(
     null,
   );
+  const []
+
   useEffect(() => {
     async function load() {
       const f = await getForecast();
@@ -53,7 +49,6 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
     if (!data) return;
     const weatherCode = data.current.weather_code;
     const isDay = data.current.is_day;
-    console.log(data);
 
     function getTheme(weatherCode: number, isDay: number) {
       const category = WeatherCategory[weatherCode] ?? "Neutral";
@@ -83,7 +78,30 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
     if (!data) return;
     function configData() {
       setCurrentWeather(data && data.current);
-      const daily = [];
+      const dailyList: any[] = [];
+      data?.daily.time.map((day, i) => {
+        dailyList.push({
+          sunrise: data.daily.sunrise[i],
+          sunset: data.daily.sunset[i],
+          date: day,
+          temperature_max: data.daily.temperature_2m_max[i],
+          temperature_mean: data.daily.temperature_2m_mean[i],
+          temperature_min: data.daily.temperature_2m_min[i],
+          feel_max: data.daily.apparent_temperature_max,
+          feel_mean: data.daily.apparent_temperature_mean,
+          feel_min: data.daily.apparent_temperature_min,
+          rain: data.daily.rain_sum,
+          uv_max: data.daily.uv_index_max,
+          uv_clear_max: data.daily.uv_index_clear_sky_max,
+          wind_speed: data.daily.wind_speed_10m_max,
+          daylight_duration: data.daily.daylight_duration,
+          sunshine_duration: data.daily.sunshine_duration,
+          weather_code: data.daily.weather_code,
+          precipitaion_hrs: data.daily.precipitation_hours,
+          precipitaion_sum: data.daily.precipitation_sum,
+        });
+      });
+      console.log(dailyList);
     }
     configData();
   }, [data]);
@@ -105,7 +123,7 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
         forecast,
         setForecast,
         currentLocation,
-        currentWeather
+        currentWeather,
       }}
     >
       {children}
