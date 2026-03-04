@@ -17,6 +17,7 @@ export const typography = {
   cardTemp: 16, // Temperatures inside the small forecast cards
   caption: 12, // "Wind", "Humidity", "21 Jan"
   tiny: 10,
+  unit: 70
 };
 
 export const lineHeight = {

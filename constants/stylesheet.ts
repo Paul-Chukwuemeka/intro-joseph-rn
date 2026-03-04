@@ -38,12 +38,12 @@ export const style = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
   },
-    location: {
+  location: {
     textAlign: "center",
     fontSize: typography.h2,
     fontFamily: fontWeights.ExtraBold,
     letterSpacing: letterSpacings.h1,
-    flex:1,
+    flex: 1,
   },
   date: {
     width: "auto",
@@ -54,7 +54,7 @@ export const style = StyleSheet.create({
     fontSize: typography.body,
     fontFamily: fontWeights.Medium,
     letterSpacing: letterSpacings.tiny,
-    margin:"auto"
+    margin: "auto",
   },
   weather: {
     textAlign: "center",
@@ -66,6 +66,7 @@ export const style = StyleSheet.create({
   temp: {
     fontSize: typography.display,
     textAlign: "center",
+    fontFamily: fontWeights.ExtraBold,
     letterSpacing: letterSpacings.display,
     lineHeight: lineHeight.display,
   },
@@ -79,7 +80,10 @@ export const style = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
   },
-
+  summary: {
+    fontSize: typography.cardTemp,
+    fontFamily: fontWeights.Medium,
+  },
   icon: {
     fontSize: 60,
   },

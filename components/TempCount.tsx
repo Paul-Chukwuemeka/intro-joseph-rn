@@ -49,7 +49,7 @@ export default function Counter({
       <Animated.Text style={{ fontSize: typography.display,lineHeight:150 }}>
         {displayValue}
       </Animated.Text>
-      <Text style={{ fontSize: typography.h1 }}>°c</Text>
+      <Text style={{ fontSize: typography.unit }}>°c</Text>
     </View>
   );
 }

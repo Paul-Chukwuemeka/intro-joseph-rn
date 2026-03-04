@@ -1,17 +1,16 @@
 import { useState, createContext, ReactNode, useEffect } from "react";
-import { day, OpenMeteoWeatherResponse, WeatherCategory } from "@/types";
 import { colors } from "@/constants/constants";
 import getForecast from "@/utils/getForeCast";
 import { getCurrentLocation } from "@/utils/currentlocation";
-import { CurrentWeather, appContextType, themeType, City } from "@/types";
-
-class WeatherItem {
-  [key: string]: string;
-
-  constructor(key: string, value: string) {
-    this[`${key}`] = value;
-  }
-}
+import {
+  CurrentWeather,
+  appContextType,
+  themeType,
+  City,
+  day,
+  OpenMeteoWeatherResponse,
+  WeatherCategory,
+} from "@/types";
 
 export const AppContext = createContext<appContextType | null>(null);
 
@@ -27,7 +26,8 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
   const [currentWeather, setCurrentWeather] = useState<CurrentWeather | null>(
     null,
   );
-  const []
+  const [today, setToday] = useState<day | null>(null);
+  const [weekForecast, setWeekForecast] = useState<day[] | null>(null);
 
   useEffect(() => {
     async function load() {
@@ -56,7 +56,7 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
       switch (category) {
         case "Thunderstorm":
           return isDay ? colors.Thunderstorm : colors.ThunderstormNight;
-        case "Rain":
+        case "Rainy":
           return isDay ? colors.Rain : colors.RainNight;
         case "Snow":
           return isDay ? colors.Snow : colors.SnowNight;
@@ -78,30 +78,35 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
     if (!data) return;
     function configData() {
       setCurrentWeather(data && data.current);
-      const dailyList: any[] = [];
+      const dailyList: day[] = [];
       data?.daily.time.map((day, i) => {
         dailyList.push({
           sunrise: data.daily.sunrise[i],
           sunset: data.daily.sunset[i],
-          date: day,
+          time: day,
+          humidity_mean: data.daily.relative_humidity_2m_mean[i],
           temperature_max: data.daily.temperature_2m_max[i],
           temperature_mean: data.daily.temperature_2m_mean[i],
           temperature_min: data.daily.temperature_2m_min[i],
-          feel_max: data.daily.apparent_temperature_max,
-          feel_mean: data.daily.apparent_temperature_mean,
-          feel_min: data.daily.apparent_temperature_min,
-          rain: data.daily.rain_sum,
-          uv_max: data.daily.uv_index_max,
-          uv_clear_max: data.daily.uv_index_clear_sky_max,
-          wind_speed: data.daily.wind_speed_10m_max,
-          daylight_duration: data.daily.daylight_duration,
-          sunshine_duration: data.daily.sunshine_duration,
-          weather_code: data.daily.weather_code,
-          precipitaion_hrs: data.daily.precipitation_hours,
-          precipitaion_sum: data.daily.precipitation_sum,
+          feel_max: data.daily.apparent_temperature_max[i],
+          feel_mean: data.daily.apparent_temperature_mean[i],
+          feel_min: data.daily.apparent_temperature_min[i],
+          rain: data.daily.rain_sum[i],
+          uv_max: data.daily.uv_index_max[i],
+          uv_clear_max: data.daily.uv_index_clear_sky_max[i],
+          wind_speed: data.daily.wind_speed_10m_max[i],
+          daylight_duration: data.daily.daylight_duration[i],
+          sunshine_duration: data.daily.sunshine_duration[i],
+          weather_code: data.daily.weather_code[i],
+          precipitation_hrs: data.daily.precipitation_hours[i],
+          precipitation_sum: data.daily.precipitation_sum[i],
+          showers_sum: data.daily.showers_sum[i],
+          wind_direction_10m_dominant: data.daily.wind_direction_10m_dominant[i],
+          wind_gusts_10m_max: data.daily.wind_gusts_10m_max[i],
         });
       });
-      console.log(dailyList);
+      setWeekForecast(dailyList);
+      setToday(dailyList[0]);
     }
     configData();
   }, [data]);
@@ -124,6 +129,8 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
         setForecast,
         currentLocation,
         currentWeather,
+        today,
+        weekForecast,
       }}
     >
       {children}

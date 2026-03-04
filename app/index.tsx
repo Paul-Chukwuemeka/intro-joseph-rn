@@ -15,7 +15,6 @@ import { ScrollView, Text, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import ForecastCard from "@/components/forecastCard";
 import SearchField from "@/components/searchField";
-import Stats from "@/components/stats";
 import { AppContext } from "@/context/appContext";
 import { StatusBar } from "expo-status-bar";
 import Counter from "@/components/TempCount";
@@ -61,7 +60,6 @@ const Home = () => {
                 </View>
                 <Counter target={Math.round(currentWeather.temperature_2m)} />
                 <Summary />
-                <Stats />
                 {/* <View style={{ marginTop: spacing.section }}>
                   <View
                     style={{

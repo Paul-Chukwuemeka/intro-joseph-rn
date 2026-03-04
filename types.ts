@@ -35,28 +35,32 @@ export interface DailyWeather {
   wind_direction_10m_dominant: number[];
   wind_gusts_10m_max: number[];
   wind_speed_10m_max: number[];
+  relative_humidity_2m_mean: number[]
 }
 
 export interface day {
-  apparent_temperature_mean: number;
-  apparent_temperature_min: number;
+  time: string
+  feel_mean: number;
+  feel_min: number;
+  feel_max: number;
   daylight_duration: number;
-  precipitation_hours: number;
+  precipitation_hrs: number;
   precipitation_sum: number;
-  rain_sum: number;
+  rain: number;
   showers_sum: number;
   sunrise: string;
   sunset: string;
   sunshine_duration: number;
-  temperature_2m_max: number;
-  temperature_2m_mean: number;
-  temperature_2m_min: number;
-  uv_index_clear_sky_max: number;
-  uv_index_max: number;
+  temperature_max: number;
+  temperature_mean: number;
+  temperature_min: number;
+  uv_clear_max: number;
+  uv_max: number;
   weather_code: number;
   wind_direction_10m_dominant: number;
   wind_gusts_10m_max: number;
-  wind_speed_10m_max: number;
+  wind_speed: number;
+  humidity_mean: number
 }
 
 export interface CurrentWeather {
@@ -93,7 +97,7 @@ export interface HourlyWeather {
 
 export const WeatherCategory: Record<
   number,
-  "Clear" | "Clouds" | "Rain" | "Thunderstorm" | "Snow" | "Mist" | "Neutral"
+  "Clear" | "Clouds" | "Rainy" | "Thunderstorm" | "Snow" | "Mist" | "Neutral"
 > = {
   0: "Clear",
   1: "Clear",
@@ -101,23 +105,23 @@ export const WeatherCategory: Record<
   3: "Clouds",
   45: "Mist",
   48: "Mist",
-  51: "Rain",
-  53: "Rain",
-  55: "Rain",
-  56: "Rain",
-  57: "Rain",
-  61: "Rain",
-  63: "Rain",
-  65: "Rain",
-  66: "Rain",
-  67: "Rain",
+  51: "Rainy",
+  53: "Rainy",
+  55: "Rainy",
+  56: "Rainy",
+  57: "Rainy",
+  61: "Rainy",
+  63: "Rainy",
+  65: "Rainy",
+  66: "Rainy",
+  67: "Rainy",
   71: "Snow",
   73: "Snow",
   75: "Snow",
   77: "Snow",
-  80: "Rain",
-  81: "Rain",
-  82: "Rain",
+  80: "Rainy",
+  81: "Rainy",
+  82: "Rainy",
   85: "Snow",
   86: "Snow",
   95: "Thunderstorm",
@@ -156,4 +160,6 @@ export type appContextType = {
   searchQuery: string;
   currentLocation: string[] | null;
   currentWeather: CurrentWeather | null;
+  today: day|null,
+  weekForecast: day[] | null
 };

@@ -33,6 +33,7 @@ forecastApi.interceptors.request.use((config) => {
       "precipitation_hours",
       "temperature_2m_mean",
       "apparent_temperature_mean",
+      "relative_humidity_2m_mean"
     ].join(","),
 
     hourly: [
