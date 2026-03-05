@@ -13,9 +13,9 @@ export function Menubtn() {
         viewBox="0 0 24 24"
         fill="none"
         stroke={theme.primaryText}
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
         <Path d="M4 5h16" />
         <Path d="M4 12h16" />

@@ -1,32 +1,28 @@
-import Header from "@/components/header";
+import Header from "@/components/layout/header";
 import {
-  fontWeights,
-  letterSpacings,
-  lineHeight,
+
   spacing,
-  typography,
 } from "@/constants/constants";
 import { style } from "@/constants/stylesheet";
 import useLoadFonts from "@/hooks/useLoadFonts";
-import { Lucide } from "@react-native-vector-icons/lucide";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useContext, useEffect } from "react";
 import { ScrollView, Text, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import ForecastCard from "@/components/forecastCard";
 import SearchField from "@/components/searchField";
 import { AppContext } from "@/context/appContext";
 import { StatusBar } from "expo-status-bar";
-import Counter from "@/components/TempCount";
+import Counter from "@/components/layout/TempCount";
 import { WeatherCategory } from "@/types";
-import Summary from "@/components/summary";
+import Summary from "@/components/layout/summary";
+import DailyForecast from "@/components/layout/DailyForecast";
+import HourlyForecast from "@/components/layout/HourlyForeCast";
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
 const Home = () => {
   const { fontsLoaded, fontError } = useLoadFonts();
-  const { data, theme, isSearch, forecast, currentWeather } =
-    useContext(AppContext)!;
+  const { data, theme, isSearch, currentWeather } = useContext(AppContext)!;
   useEffect(() => {
     if ((fontsLoaded && data) || (fontError && data)) {
       SplashScreen.hideAsync().catch(() => {});
@@ -60,34 +56,8 @@ const Home = () => {
                 </View>
                 <Counter target={Math.round(currentWeather.temperature_2m)} />
                 <Summary />
-                {/* <View style={{ marginTop: spacing.section }}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Text
-                      style={{
-                        fontSize: typography.h2,
-                        fontFamily: fontWeights.ExtraBold,
-                        color: theme.secondaryText,
-                      }}
-                    >
-                      Weekly forecast
-                    </Text>
-                    <Lucide
-                      name="move-right"
-                      style={[style.icon, { color: theme.secondaryText }]}
-                    />
-                  </View>
-                  <View style={style.forecasts}>
-                    {forecast.map((d: any, i: number) => {
-                      return <ForecastCard key={i} d={d} />;
-                    })}
-                  </View>
-                </View> */}
+                <DailyForecast />
+                <HourlyForecast/>
               </View>
             )}
           </ScrollView>

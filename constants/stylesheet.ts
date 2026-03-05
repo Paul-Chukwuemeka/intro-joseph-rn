@@ -11,7 +11,7 @@ import {
 export const style = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: spacing.xxl,
+    paddingHorizontal: spacing.lg,
     gap: 50,
     width: "100%",
   },
@@ -104,12 +104,26 @@ export const style = StyleSheet.create({
     height: 110,
   },
   forecast: {
-    flex: 1,
+    width: "100%",
+    height: 280,
+    marginTop: spacing.section,
+    borderRadius: radius.md,
+    padding: 15,
+    gap:5
+  },
+  forecastHeader: {
+    display: "flex",
     alignItems: "center",
-    padding: spacing.md,
-    borderRadius: radius.sm,
-    justifyContent: "space-between",
-    gap: 2,
+    flexDirection: "row",
+    gap: 5,
+  },
+  forecastHeadertext: {
+    fontFamily: fontWeights.SemiBold,
+    fontSize: typography.cardTemp,
+  },
+  forecastOptions: {
+    height:30,
+    borderRadius:30
   },
   searchField: {
     position: "absolute",

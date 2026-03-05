@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { View,Text } from "react-native";
 import Animated, {
   useAnimatedReaction,
@@ -8,6 +8,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { scheduleOnRN } from "react-native-worklets";
 import { typography, spacing } from "@/constants/constants";
+import { AppContext } from "@/context/appContext";
 
 export default function Counter({
   target,
@@ -18,6 +19,7 @@ export default function Counter({
 }) {
   const progress = useSharedValue(target >= 20 ? target - 20: 0);
   const [displayValue, setDisplayValue] = useState(0);
+  const {theme} = useContext(AppContext)!
 
   useAnimatedReaction(
     () => Math.round(progress.value),
@@ -46,10 +48,10 @@ export default function Counter({
         
       }}
     >
-      <Animated.Text style={{ fontSize: typography.display,lineHeight:150 }}>
+      <Animated.Text style={{ fontSize: typography.display,lineHeight:150,color:theme.primaryText }}>
         {displayValue}
       </Animated.Text>
-      <Text style={{ fontSize: typography.unit }}>°c</Text>
+      <Text style={{ fontSize: typography.unit,color:theme.primaryText  }}>°c</Text>
     </View>
   );
 }

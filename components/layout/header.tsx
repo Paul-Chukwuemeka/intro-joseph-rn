@@ -4,10 +4,10 @@ import { AppContext } from "@/context/appContext";
 import React, { useContext } from "react";
 import { View, Text } from "react-native";
 import { getDate } from "@/utils/getDate";
-import { Menubtn } from "./ui/menuBtn";
+import { Menubtn } from "../ui/menuBtn";
 
 const Header = () => {
-  const { theme, data, currentLocation } = useContext(AppContext)!;
+  const { theme, currentLocation } = useContext(AppContext)!;
   const date = getDate();
 
   return (
